@@ -2,12 +2,12 @@
 
 ## Student Details
 
-- **Full Name:** `<Enter name>`
-- **CCID:** `<Enter ccid>`
+- **Full Name:** `Jiawang Tang`
+- **CCID:** `jiawang3`
 
 ## References and Resources
 
-List any resources used here, or simply put `N/A` if not applicable.
+https://firebase.google.com/docs/storage/android/delete-files
 
 ## Verbal Collaboration
 
