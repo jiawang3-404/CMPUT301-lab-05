@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CityDialogFragment.CityDialogListener {
 
-    private Button addCityButton, deleteCityButton;
+    private Button addCityButton;
     private ListView cityListView;
 
     private ArrayList<City> cityArrayList;
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
         // Set views
         addCityButton = findViewById(R.id.buttonAddCity);
         cityListView = findViewById(R.id.listviewCities);
-        deleteCityButton = findViewById(R.id.buttonDeleteCity);
 
         // create city array
         cityArrayList = new ArrayList<>();
@@ -81,15 +80,8 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
 
         cityListView.setOnItemClickListener((adapterView, view, i, l) -> {
             City city = cityArrayAdapter.getItem(i);
-            CityDialogFragment cityDialogFragment = CityDialogFragment.newInstance(city);
+            CityDialogFragment cityDialogFragment = CityDialogFragment.newInstance(city, i);
             cityDialogFragment.show(getSupportFragmentManager(),"City Details");
-        });
-
-        deleteCityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
         });
     }
 
@@ -119,6 +111,13 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
                         Log.d("Firestore", "DocumentSnapshot successfully written!");
                     }
                 });
+    }
+
+    @Override
+    public void deleteCity(int position){
+        citiesRef.document(cityArrayList.get(position).getName()).delete();
+        cityArrayList.remove(position);
+        cityArrayAdapter.notifyDataSetChanged();
     }
 
     public void addDummyData(){

@@ -3,7 +3,9 @@ package com.example.lab5_starter;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.PointerIcon;
 import android.view.View;
 import android.widget.EditText;
 
@@ -17,12 +19,14 @@ public class CityDialogFragment extends DialogFragment {
     interface CityDialogListener {
         void updateCity(City city, String title, String year);
         void addCity(City city);
+        void deleteCity(int position);
     }
     private CityDialogListener listener;
 
-    public static CityDialogFragment newInstance(City city){
+    public static CityDialogFragment newInstance(City city, int position){
         Bundle args = new Bundle();
         args.putSerializable("City", city);
+        args.putInt("Position", position);
 
         CityDialogFragment fragment = new CityDialogFragment();
         fragment.setArguments(args);
@@ -50,14 +54,18 @@ public class CityDialogFragment extends DialogFragment {
         String tag = getTag();
         Bundle bundle = getArguments();
         City city;
+        int position;
 
         if (Objects.equals(tag, "City Details") && bundle != null){
             city = (City) bundle.getSerializable("City");
             assert city != null;
             editMovieName.setText(city.getName());
             editMovieYear.setText(city.getProvince());
+            position = bundle.getInt("Position");
+            assert position != -1;
         }
         else {
+            position = -1;
             city = null;}
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -72,6 +80,12 @@ public class CityDialogFragment extends DialogFragment {
                         listener.updateCity(city, title, year);
                     } else {
                         listener.addCity(new City(title, year));
+                    }
+                })
+                .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        listener.deleteCity(position);
                     }
                 })
                 .create();
