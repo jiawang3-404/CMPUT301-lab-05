@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "642781295279",
+    "project_id": "listy-city-lab-5-8d2fe",
+    "storage_bucket": "listy-city-lab-5-8d2fe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642781295279:android:d7b064db557310965cda5a",
+        "android_client_info": {
+          "package_name": "com.example.lab5_starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKkAcvUNCfBl8Q3Gvc6y2Cc7vaa40bEdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
